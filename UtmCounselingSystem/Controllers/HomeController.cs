@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using UtmCounselingSystem.Models;
 
@@ -17,7 +18,6 @@ namespace UtmCounselingSystem.Controllers
         {
             return View();
         }
-
         public IActionResult Privacy()
         {
             return View();
