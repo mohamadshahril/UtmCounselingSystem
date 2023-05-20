@@ -33,7 +33,7 @@
                                 Appointment Management
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Appointment Types</a></li>
+                                <li><a class="dropdown-item" asp-controller="AppointmentTypes" asp-action="Index">Appointment Types</a></li>
                                 <li><a class="dropdown-item" href="#">Appointment Allocations</a></li>
                                 <li><a class="dropdown-item" href="#">Appointment Requests</a></li>
                                 <li><a class="dropdown-item" href="#">Client Management</a></li>
@@ -58,6 +58,9 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/sweetalert/sweetalert.min.js"></script>
+
+
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
