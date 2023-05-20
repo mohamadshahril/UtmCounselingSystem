@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using UtmCounselingSystem.Data;
 using AutoMapper;
 using UtmCounselingSystem.Configurations;
+using UtmCounselingSystem.Contracts;
+using UtmCounselingSystem.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,9 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<Client>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<IAppointmentTypeRepository, AppointmentTypeRepository>();
 
 builder.Services.AddAutoMapper(typeof(MapperConfig));
 

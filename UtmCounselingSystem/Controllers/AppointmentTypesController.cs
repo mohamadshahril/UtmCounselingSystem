@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using UtmCounselingSystem.Contracts;
 using UtmCounselingSystem.Data;
 using UtmCounselingSystem.Models;
 
@@ -13,36 +14,31 @@ namespace UtmCounselingSystem.Controllers
 {
     public class AppointmentTypesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IAppointmentTypeRepository appointmentTypeRepository;
         private readonly IMapper mapper;
 
-        public AppointmentTypesController(ApplicationDbContext context, IMapper mapper)
+        public AppointmentTypesController(IAppointmentTypeRepository appointmentTypeRepository, IMapper mapper)
         {
-            _context = context;
+            this.appointmentTypeRepository = appointmentTypeRepository;
             this.mapper = mapper;
         }
 
         // GET: AppointmentTypes
         public async Task<IActionResult> Index()
         {
-            var appointmentTypes = mapper.Map<List<AppointmentTypeVM>>(await _context.AppointmentTypes.ToListAsync());
+            var appointmentTypes = mapper.Map<List<AppointmentTypeVM>>(await appointmentTypeRepository.GetAllAsync());
             return View(appointmentTypes);
         }
 
         // GET: AppointmentTypes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.AppointmentTypes == null)
-            {
-                return NotFound();
-            }
-
-            var appointmentType = await _context.AppointmentTypes
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var appointmentType = await appointmentTypeRepository.GetAsync(id);
             if (appointmentType == null)
             {
                 return NotFound();
             }
+
             var appointmentTypeVM = mapper.Map<AppointmentTypeVM>(appointmentType);
             return View(appointmentTypeVM);
         }
@@ -63,8 +59,7 @@ namespace UtmCounselingSystem.Controllers
             if (ModelState.IsValid)
             {
                 var appointmentType = mapper.Map<AppointmentType>(appointmentTypeVM);
-                _context.Add(appointmentType);
-                await _context.SaveChangesAsync();
+                await appointmentTypeRepository.AddAsync(appointmentType);
                 return RedirectToAction(nameof(Index));
             }
             return View(appointmentTypeVM);
@@ -73,17 +68,11 @@ namespace UtmCounselingSystem.Controllers
         // GET: AppointmentTypes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var appointmentType = await _context.AppointmentTypes.FindAsync(id);
+            var appointmentType = await appointmentTypeRepository.GetAsync(id);
             if (appointmentType == null)
             {
                 return NotFound();
             }
-
             var appointmentTypeVM = mapper.Map<AppointmentTypeVM>(appointmentType);
             return View(appointmentTypeVM);
         }
@@ -105,12 +94,11 @@ namespace UtmCounselingSystem.Controllers
                 try
                 {
                     var appointmentType = mapper.Map<AppointmentType>(appointmentTypeVM);
-                    _context.Update(appointmentType);
-                    await _context.SaveChangesAsync();
+                    await appointmentTypeRepository.UpdateAsync(appointmentType);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AppointmentTypeExists(appointmentTypeVM.Id))
+                    if (!await appointmentTypeRepository.Exists(appointmentTypeVM.Id))
                     {
                         return NotFound();
                     }
@@ -124,38 +112,13 @@ namespace UtmCounselingSystem.Controllers
             return View(appointmentTypeVM);
         }
 
-        // GET: AppointmentTypes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var appointmentType = await _context.AppointmentTypes
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (appointmentType == null)
-            {
-                return NotFound();
-            }
-
-            return View(appointmentType);
-        }
-
         // POST: AppointmentTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var appointmentType = await _context.AppointmentTypes.FindAsync(id);
-            _context.AppointmentTypes.Remove(appointmentType);
-            await _context.SaveChangesAsync();
+            await appointmentTypeRepository.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool AppointmentTypeExists(int id)
-        {
-            return _context.AppointmentTypes.Any(e => e.Id == id);
         }
     }
 }
