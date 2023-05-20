@@ -11,12 +11,12 @@ using UtmCounselingSystem.Models;
 
 namespace UtmCounselingSystem.Controllers
 {
-    public class AppointmentTypesController2 : Controller
+    public class AppointmentTypesControllerX : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper mapper;
 
-        public AppointmentTypesController2(ApplicationDbContext context, IMapper mapper)
+        public AppointmentTypesControllerX(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             this.mapper = mapper;
