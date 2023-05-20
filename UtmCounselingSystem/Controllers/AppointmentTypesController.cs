@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using UtmCounselingSystem.Constants;
 using UtmCounselingSystem.Contracts;
 using UtmCounselingSystem.Data;
 using UtmCounselingSystem.Models;
 
 namespace UtmCounselingSystem.Controllers
 {
+    [Authorize(Roles = Roles.Administrator)]
     public class AppointmentTypesController : Controller
     {
         private readonly IAppointmentTypeRepository appointmentTypeRepository;

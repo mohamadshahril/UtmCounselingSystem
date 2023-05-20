@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UtmCounselingSystem.Data;
 
@@ -11,9 +12,10 @@ using UtmCounselingSystem.Data;
 namespace UtmCounselingSystem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230520193910_AddedDefaultUserAndRoles")]
+    partial class AddedDefaultUserAndRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,14 +54,14 @@ namespace UtmCounselingSystem.Data.Migrations
                         new
                         {
                             Id = "cac43a6e-f7bb-4448-baaf-1add431ccbbf",
-                            ConcurrencyStamp = "2b766ba3-7b32-408f-abe5-f3e611403070",
+                            ConcurrencyStamp = "161809b6-07f3-4c07-9758-cad6e99dee42",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "cac43a7e-f7cb-4148-baaf-1acb431eabbf",
-                            ConcurrencyStamp = "82fa851b-5365-494c-aabf-fde63a005ce4",
+                            ConcurrencyStamp = "a779622a-dd10-4d0a-a25e-90d1eebfce33",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -328,7 +330,7 @@ namespace UtmCounselingSystem.Data.Migrations
                         {
                             Id = "408aa945-3d84-4421-8342-7269ec64d949",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c42c200a-0db6-471b-a3f1-6d448407bb22",
+                            ConcurrencyStamp = "c4089997-34a7-436f-99e7-cf8f74ac3acd",
                             DateJoined = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@localhost.com",
@@ -338,9 +340,9 @@ namespace UtmCounselingSystem.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFhEHLsKvJKbU0Nn0AD69DHPss6E1UsuNZzqLvHy8x8q03NE2sB5gtgEsUcVVnO6FQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEApJPNP9VFITFrjdqKlTCGSSBwp75kTCU28ZUH2ouVFDvJ/zklmDvrd5djHmReVtpg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e77d265b-302b-468b-b05c-5488a70dc4c5",
+                            SecurityStamp = "789702f8-3ef0-4a1c-8745-1609ad3d5808",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -348,7 +350,7 @@ namespace UtmCounselingSystem.Data.Migrations
                         {
                             Id = "3f4631bd-f907-4409-b416-ba356312e659",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bd893dd0-bc5a-49d5-be2c-74cd1a396e0f",
+                            ConcurrencyStamp = "a3bd3328-a7e9-410d-aa35-3bd046ab567c",
                             DateJoined = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "user@localhost.com",
@@ -358,9 +360,9 @@ namespace UtmCounselingSystem.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@LOCALHOST.COM",
                             NormalizedUserName = "USER@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBIJkRCyA5UJ3MXDVeVojDIEWx3uGmCk5YskakdpYn9+cnX7pknIAFu3CoqrClXNkw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKkvFqbqCD58NK3+T4Sk7OUsrJca3igKzJgv+tiXN54ilcDIMZQA0mnbWJuL7I6t4g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "61abb42b-2019-4083-9dc1-887bf174a6c0",
+                            SecurityStamp = "264f9714-a324-4b61-a94a-9bb9e525d971",
                             TwoFactorEnabled = false,
                             UserName = "user@localhost.com"
                         });

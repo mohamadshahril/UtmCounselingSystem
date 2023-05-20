@@ -5,6 +5,8 @@ using AutoMapper;
 using UtmCounselingSystem.Configurations;
 using UtmCounselingSystem.Contracts;
 using UtmCounselingSystem.Repositories;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using UtmCounselingSystem.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +17,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<Client>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddTransient<IEmailSender>(s => new EmailSender("localhost", 25, "no-reply@utmcs.com"));
 
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IAppointmentTypeRepository, AppointmentTypeRepository>();
