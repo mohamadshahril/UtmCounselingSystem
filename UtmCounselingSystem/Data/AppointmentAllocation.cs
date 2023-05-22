@@ -2,7 +2,7 @@
 
 namespace UtmCounselingSystem.Data
 {
-    public class AppointmentAllocation
+    public class AppointmentAllocation : BaseEntity
     {
         public int Id { get; set; }
         public int NumberOfDays { get; set; }
