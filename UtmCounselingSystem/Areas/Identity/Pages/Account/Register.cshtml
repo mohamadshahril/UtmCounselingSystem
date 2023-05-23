@@ -1,10 +1,15 @@
 ﻿@page
 @model RegisterModel
+
+<div id="card1">
+    <div id="card-content1">
 @{
     ViewData["Title"] = "Register";
 }
 
 <h1>@ViewData["Title"]</h1>
+
+
 
 <div class="row">
     <div class="col-md-12">
@@ -66,12 +71,18 @@
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
             <br/>
+            <br/>
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary btn-block">Register</button>
         </form>
     </div>
 
 </div>
+        
+    </div>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+
+        

@@ -19,11 +19,15 @@ namespace UtmCounselingSystem.Controllers
     {
         private readonly IAppointmentTypeRepository appointmentTypeRepository;
         private readonly IMapper mapper;
+        private readonly IAppointmentAllocationRepository appointmentAllocationRepository;
 
-        public AppointmentTypesController(IAppointmentTypeRepository appointmentTypeRepository, IMapper mapper)
+        public AppointmentTypesController(IAppointmentTypeRepository appointmentTypeRepository
+            , IMapper mapper
+            ,IAppointmentAllocationRepository appointmentAllocationRepository)
         {
             this.appointmentTypeRepository = appointmentTypeRepository;
             this.mapper = mapper;
+            this.appointmentAllocationRepository = appointmentAllocationRepository;
         }
 
         // GET: AppointmentTypes
@@ -115,7 +119,7 @@ namespace UtmCounselingSystem.Controllers
             return View(appointmentTypeVM);
         }
 
-        // POST: AppointmentTypes/Delete/5
+        // POST: LeaveTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -123,6 +127,21 @@ namespace UtmCounselingSystem.Controllers
             await appointmentTypeRepository.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
-        
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> AllocateAppointment(int id)
+        //{
+        //    await appointmentAllocationRepository.AppointmentAllocation(id);
+        //    return RedirectToAction(nameof(Index));
+        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AllocateAppointment(int id)
+        {
+            await appointmentAllocationRepository.AppointmentAllocaton(id);
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

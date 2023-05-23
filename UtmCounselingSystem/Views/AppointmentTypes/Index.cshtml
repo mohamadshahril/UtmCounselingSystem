@@ -32,11 +32,60 @@
                 @Html.DisplayFor(modelItem => item.DefaultDays)
             </td>
             <td>
+                 <button data-id="@item.Id" class="btn btn-primary allocateBtn" type="button">Allocate Appointment</button>
                 <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                 <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <button data-id="@item.Id" class="btn btn-danger deleteBtn" type="button">Delete</button>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+<form id="deleteform" asp-action="Delete">
+    <input type="hidden" id="appointmentTypeId" name="Id" />
+</form>
+
+<form id="allocateForm" asp-action="AllocateAppointment">
+    <input type="hidden" id="appointmentAllocationId" name="Id" />
+</form>
+
+@section Scripts{
+    <script>
+        $(function () {
+
+            $('.deleteBtn').click(function (e) {
+                swal({
+                    title: "Are you sure?",
+                    text: "Are you sure you want to delete this record?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true
+                }).then((confirm) => {
+                    if (confirm) {
+                        var btn = $(this);
+                        var id = btn.data("id");
+                        $('#appointmentTypeId').val(id);
+                        $('#deleteForm').submit();
+                    }
+                });
+            });
+            $('.allocateBtn').click(function (e) {
+                swal({
+                    title: "Are you sure?",
+                    text: "Are you sure you want to allocation this appointment to all client?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true
+                }).then((confirm) => {
+                    if (confirm) {
+                        var btn = $(this);
+                        var id = btn.data("id");
+                        $('#appointmentAllocationId').val(id);
+                        $('#allocateForm').submit();
+                    }
+                });
+            });
+        });
+    </script>
+}
