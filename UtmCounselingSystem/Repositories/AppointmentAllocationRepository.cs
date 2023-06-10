@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using UtmCounselingSystem.Constants;
 using UtmCounselingSystem.Contracts;
@@ -11,7 +12,7 @@ namespace UtmCounselingSystem.Repositories
         private readonly ApplicationDbContext context;
         private readonly UserManager<Client> userManager;
         private readonly IAppointmentTypeRepository appointmentTypeRepository;
-
+        private readonly IMapper mapper;
         public AppointmentAllocationRepository(ApplicationDbContext context, 
             UserManager<Client> userManager, IAppointmentTypeRepository appointmentTypeRepository) : base(context)
         {
