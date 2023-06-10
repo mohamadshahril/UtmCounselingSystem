@@ -9,6 +9,7 @@ namespace UtmCounselingSystem.Configurations
         public MapperConfig()
         {
             CreateMap<AppointmentType, AppointmentTypeVM>().ReverseMap();
+            CreateMap<Client, ClientListVM>().ReverseMap();
         }
     }
 }
