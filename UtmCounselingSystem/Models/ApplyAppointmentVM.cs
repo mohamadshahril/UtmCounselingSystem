@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace UtmCounselingSystem.Models
 {
-    public class BookAppointmentVM
+    public class ApplyAppointmentVM
     {
         [Display(Name = "UTM ID ")]
         [Required]
